@@ -10,43 +10,31 @@ catkin_package()
 
 include_directories(include ${catkin_INCLUDE_DIRS})
 
-
 ###########
 ## Build ##
 ###########
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+add_library(robocom src/Odometry.cpp
+                    src/EuleroOdometry.cpp
 
-add_library(robocom src/PixyPublisher)
-add_library(odometry_lib src/Odometry)
-add_library(eulero_odometry src/EuleroOdometry)
-add_library(rungekutta4_odometry src/RungeKutta4Odometry)
-add_library(path_publisher src/PathPublisher)
+ 		    src/RungeKutta4Odometry.cpp
+		    src/PathPublisher.cpp)
 
 add_executable(odometry src/OdometryNode.cpp)
 add_executable(path src/PathNode.cpp)
 
-target_link_libraries(teleop_pixy_joy robocom ${catkin_LIBRARIES})
-
-
-target_link_libraries(odometry odometry_lib ${catkin_LIBRARIES})
-target_link_libraries(odometry eulero_odometry ${catkin_LIBRARIES})
-target_link_libraries(odometry rungekutta4_odometry ${catkin_LIBRARIES})
-target_link_libraries(path path_publisher ${catkin_LIBRARIES})
-
-target_link_libraries(random_exploration ${catkin_LIBRARIES})
-target_link_libraries(odometry ${catkin_LIBRARIES})
-target_link_libraries(path ${catkin_LIBRARIES})
+target_link_libraries(odometry robocom ${catkin_LIBRARIES})
+target_link_libraries(path robocom ${catkin_LIBRARIES})
 
 add_dependencies(odometry ${catkin_EXPORTED_TARGETS})
 add_dependencies(path ${catkin_EXPORTED_TARGETS})
-
-
 
 #############
 ## Install ##
 #############
  
-install(TARGETS teleop_pixy_joy
-        ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+install(TARGETS robocom odometry path
+	ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
         RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )

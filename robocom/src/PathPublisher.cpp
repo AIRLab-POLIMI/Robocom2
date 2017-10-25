@@ -3,7 +3,7 @@
 #include <ros/ros.h>
 #include <tf/transform_listener.h>
 #include <nav_msgs/Path.h>
-#include "triskar/PathPublisher.h"
+#include "robocom/PathPublisher.h"
 
 PathPublisher::PathPublisher(ros::NodeHandle& nh, string tfPosTargetFrame, string tfPosSourceFrame,
 				string pathHeaderFrameId, string pathTopic)
