@@ -2,7 +2,10 @@
 	<arg name="teleop" default="1" />
 	<arg name="record" default="1" />
 	<arg name="laser" default="1" />
-	<arg name="laserID" default="H0707625"/>
+	<arg name="laser_host" default="192.168.1.4"/>
+	<arg name="kinect" default="1"/>
+	<arg name="odom" default="1"/>
+
 	
 	<!-- rosserial launch file for nova core -->
 	<include file="$(find rosserial_core)/launch/serial_node.launch">
@@ -28,4 +31,18 @@
 		<param name="header_frame_id" type="string" value="odom" />
 		<param name="child_frame_id" type="string" value="base_link" />
 	</node>
+
+	<!-- laser node -->
+	<node pkg="lms1xx" type="LMS1xx_node" name="lms1xx_node" if="$(arg laser)">
+		<param name="host" type="string" value="$(arg laser_host)" />
+		<param name="frame_id" type="string" value="laser_base" />
+	</node>
+
+	<!-- kinect node -->
+	<node pkg="freenect_camera" type="freenect_node" name="freenect_node" if="$(arg kinect)">
+	</node>
+
+	<!-- TF laser-baselink -->
+	<node pkg="tf" type="static_transform_publisher" name="laser_frame" args="-0.09 0.0 0.05 0.0 0.0 0.0 base_link laser_base 100" />
+
 </launch> 
