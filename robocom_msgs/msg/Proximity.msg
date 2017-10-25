@@ -1,2 +1,2 @@
-#Proximity readings from a robocom
-float32[8] range
+# Proximity message for robocom. It should be changed when sensors are mounted. 
+uint16[8] range
