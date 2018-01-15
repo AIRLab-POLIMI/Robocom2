@@ -45,4 +45,7 @@
 	<!-- TF laser-baselink -->
 	<node pkg="tf" type="static_transform_publisher" name="laser_frame" args="-0.09 0.0 0.05 0.0 0.0 0.0 base_link laser_base 100" />
 
+	<!-- Record sensors data -->
+	<node name="recorder" pkg="rosbag" type="record" args="--lz4 -O $(arg bag) /odom /scan"/>
+
 </launch> 

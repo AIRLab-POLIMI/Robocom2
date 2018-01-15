@@ -12,12 +12,12 @@ PathPublisher::PathPublisher(ros::NodeHandle& nh, string tfPosTargetFrame, strin
 	pathPublisher = nh.advertise<nav_msgs::Path>(pathTopic, 50);
 	poses = vector<geometry_msgs::PoseStamped>(0);
 }
-	
+
 void PathPublisher::getPose() {
 	tf::StampedTransform transform;
 	try {
 		listener.lookupTransform(tfPosTargetFrame, tfPosSourceFrame, ros::Time(0), transform);
-		
+
 		geometry_msgs::PoseStamped poseStamped;
    		poseStamped.header.stamp = ros::Time::now();
 		poseStamped.header.frame_id = pathHeaderFrameId;
@@ -29,9 +29,9 @@ void PathPublisher::getPose() {
 		poseStamped.pose.orientation.z = transform.getRotation().getZ();
 		poseStamped.pose.orientation.w = transform.getRotation().getW();
    		poses.push_back(poseStamped);
-   		
+
    		ROS_INFO("getPose");
-   	
+
 	} catch (tf::TransformException ex) {
 		ROS_ERROR("%s",ex.what());
 	}
