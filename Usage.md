@@ -15,7 +15,7 @@ There are two ways to get access to Robocom.
 The first is to simply connect a mouse and keyboard to the USB ports located on the main PC board and then plug a display to the VGA video port. There seems to be a bug that causes the display to remain turned off if the VGA cable is connected after the PC has already been turned on; to avoid it, remember to first connect the VGA cable and then turn on the PC.  
 
 The second is to login remotely via ssh. Robocom has network access through an onboard Linksys router and is configured to use the ```192.168.1.102``` IP address. 
-To be able to login remotely, it is necessary to be on the Robocom WiFi network. In addition, ssh is configured to use port 1337:  
+To be able to login remotely, it is necessary to be on the Robocom WiFi network (password: ```aerolabio```). In addition, ssh is configured to use port 1337:  
 ``` 
 user@marvin:~/$ ssh robocom@192.168.1.102 -p1337
 ```
