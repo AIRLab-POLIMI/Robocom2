@@ -15,7 +15,8 @@ There are two ways to get access to Robocom.
 The first is to simply connect a mouse and keyboard to the USB ports located on the main PC board and then plug a display to the VGA video port. There seems to be a bug that causes the display to remain turned off if the VGA cable is connected after the PC has already been turned on; to avoid it, remember to first connect the VGA cable and then turn on the PC.  
 
 The second is to login remotely via ssh. Robocom has network access through an onboard Linksys router and is configured to use the `192.168.1.102` IP address, which is also associated with the `airlab` hostname. 
-To be able to login remotely, it is necessary to be on the Robocom WiFi network (password: `aerolabio`); ssh is configured to use port 1337. For the sake of this tutorial, we'll call the user machine `marvin`. It is possible to login by directly specifying Robocom's IP address as well as its hostname:
+To be able to login remotely, it is necessary to be on the Robocom WiFi network (password: `aerolabio`); ssh is configured to use port 1337. 
+It is possible to login by directly specifying Robocom's IP address as well as its hostname; for the sake of this tutorial, we'll call the user machine `marvin`:
 ``` 
 user@marvin:~/$ ssh robocom@192.168.1.102 -p1337
 ```
